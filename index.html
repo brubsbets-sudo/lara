@@ -59,31 +59,43 @@
     <h2 class="section-kicker">▸ toca fita</h2>
 
     <div class="walkman" id="walkman">
-      <div class="walkman-body">
 
-        <div class="walkman-top-row">
-          <span class="walkman-brand">STÉREO&nbsp;CASSETTE</span>
-          <span class="walkman-model">WM&nbsp;·&nbsp;92</span>
+      <!-- Fone de ouvido apoiado em cima do aparelho, decorativo -->
+      <div class="wm-headphones" aria-hidden="true">
+        <div class="wm-headband"></div>
+        <div class="wm-earcup wm-earcup-l"></div>
+        <div class="wm-earcup wm-earcup-r"></div>
+        <div class="wm-cord"></div>
+      </div>
+
+      <div class="wm-chassis">
+
+        <div class="wm-top-row">
+          <span class="wm-rec-dot" aria-hidden="true"></span>
+          <span class="wm-brand">STÉREO CASSETTE</span>
         </div>
 
-        <div class="cassette-window">
-          <div class="cassette">
-            <div class="reel reel-left" id="reel-left">
-              <div class="reel-hub"></div>
-            </div>
+        <div class="wm-window-row">
+          <span class="wm-arrow-icon" aria-hidden="true">▲</span>
+          <div class="cassette-window">
+            <div class="cassette">
+              <div class="reel reel-left" id="reel-left">
+                <div class="reel-hub"></div>
+              </div>
 
-            <div class="tape-label">
-              <span class="label-title">Última Romântica</span>
-              <span class="label-sub">lado A</span>
-            </div>
+              <div class="tape-label">
+                <span class="label-title">Última Romântica</span>
+                <span class="label-sub">lado A</span>
+              </div>
 
-            <div class="reel reel-right" id="reel-right">
-              <div class="reel-hub"></div>
+              <div class="reel reel-right" id="reel-right">
+                <div class="reel-hub"></div>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="walkman-mid-row">
+        <div class="wm-readout">
           <div class="vu-meter" id="vu-meter" aria-hidden="true">
             <span class="vu-bar"></span>
             <span class="vu-bar"></span>
@@ -107,7 +119,7 @@
           <span class="time-stamp" id="time-duration">0:00</span>
         </div>
 
-        <div class="controls-row">
+        <div class="wm-transport">
           <button class="ctrl-btn" id="btn-back" type="button" aria-label="Voltar 15 segundos">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 6 3 12l8 6V6Z"/><path d="M20 6l-8 6 8 6V6Z"/></svg>
           </button>
@@ -120,22 +132,13 @@
           </button>
         </div>
 
-        <div class="volume-row">
-          <span class="volume-label">VOL</span>
-          <div class="volume-knob" id="volume-knob" tabindex="0" role="slider" aria-label="Volume" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70">
-            <div class="knob-face">
-              <div class="knob-indicator"></div>
-            </div>
-          </div>
-          <span class="volume-label volume-label-min">min</span>
-        </div>
-      </div>
+        <div class="wm-wordmark">AMOR&nbsp;STÉREO</div>
 
-      <!-- Fone de ouvido, decorativo -->
-      <div class="headphones" aria-hidden="true">
-        <div class="headphone-wire"></div>
-        <div class="headphone-cup headphone-l"></div>
-        <div class="headphone-cup headphone-r"></div>
+        <div class="wm-volume-wheel" id="volume-knob" tabindex="0" role="slider" aria-label="Volume" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70">
+          <div class="knob-face">
+            <div class="knob-indicator"></div>
+          </div>
+        </div>
       </div>
     </div>
 

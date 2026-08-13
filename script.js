@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const knobFace = volumeKnob.querySelector('.knob-face');
 
   const SEEK_STEP = 15; // segundos
-  const REEL_DEG_PER_SEC = 24; // velocidade de giro das bobinas
+  const REEL_DEG_PER_SEC = 90; // velocidade de giro das bobinas (graus/seg)
 
   function formatTime(seconds) {
     if (!isFinite(seconds) || seconds < 0) seconds = 0;
@@ -178,11 +178,13 @@ document.addEventListener('DOMContentLoaded', () => {
   audio.addEventListener('play', () => {
     btnPlay.classList.add('is-playing');
     startVuMeter();
+    startReelSpin();
   });
 
   audio.addEventListener('pause', () => {
     btnPlay.classList.remove('is-playing');
     stopVuMeter();
+    stopReelSpin();
   });
 
   audio.addEventListener('loadedmetadata', () => {
@@ -198,11 +200,41 @@ document.addEventListener('DOMContentLoaded', () => {
     const counterValue = Math.floor(audio.currentTime * 10) % 10000;
     tapeCounter.textContent = counterValue.toString().padStart(4, '0');
 
-    // bobinas giram em sincronia real com o currentTime
+    // se o áudio estiver pausado (ex: acabou de dar seek), garante que a
+    // posição das bobinas reflita o novo currentTime mesmo sem o loop rodando
+    if (audio.paused) applyReelRotation();
+  });
+
+  /*
+    Bobinas giram em sincronia real com o currentTime do áudio, mas via
+    requestAnimationFrame — o evento "timeupdate" só dispara poucas vezes
+    por segundo e deixaria o giro visivelmente picotado.
+  */
+  let reelAnimationId = null;
+
+  function applyReelRotation() {
     const rotation = audio.currentTime * REEL_DEG_PER_SEC;
     reelLeft.style.transform = `rotate(${rotation}deg)`;
     reelRight.style.transform = `rotate(${rotation}deg)`;
-  });
+  }
+
+  function reelLoop() {
+    applyReelRotation();
+    reelAnimationId = requestAnimationFrame(reelLoop);
+  }
+
+  function startReelSpin() {
+    if (reelAnimationId) return;
+    reelLoop();
+  }
+
+  function stopReelSpin() {
+    if (reelAnimationId) {
+      cancelAnimationFrame(reelAnimationId);
+      reelAnimationId = null;
+    }
+    applyReelRotation();
+  }
 
   seekBar.addEventListener('input', () => {
     audio.currentTime = Number(seekBar.value);
