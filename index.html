@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Site privado: não deve ser indexado por buscadores -->
+<meta name="robots" content="noindex, nofollow">
+
+<title>Última Romântica</title>
+<meta name="description" content="Um programa de rádio gravado com carinho, só para você.">
+
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+<!-- Google Fonts: pixelada/retrô (VT323, Press Start 2P) + romântica (Playfair Display, Caveat) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,600&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ======================================================
+     OVERLAY DE ABERTURA — "sintonizando o rádio"
+     Estática visual + sonora bem curta, com botão de pular.
+====================================================== -->
+<div id="tuning-overlay" class="tuning-overlay">
+  <canvas id="static-canvas"></canvas>
+  <div class="tuning-content">
+    <p class="tuning-label">SINTONIZANDO</p>
+    <p class="tuning-freq" id="tuning-freq">98.7 FM</p>
+    <button id="skip-tuning" class="skip-btn" type="button">pular ▸▸</button>
+  </div>
+</div>
+
+<!-- Overlays de textura, cobrindo a tela toda o tempo todo -->
+<div class="grain-overlay" aria-hidden="true"></div>
+<div class="scanlines-overlay" aria-hidden="true"></div>
+
+<main id="site-content" class="site-content" aria-hidden="true">
+
+  <!-- ============================================
+       1. HERO
+  ============================================ -->
+  <section class="hero" id="hero">
+    <div class="on-air" aria-hidden="true"><span class="on-air-dot"></span>NO AR</div>
+    <h1 class="hero-title">
+      <span id="typewriter"></span><span class="type-cursor">|</span>
+    </h1>
+    <p class="hero-subtitle">um programa de rádio, gravado bem devagarzinho, só pra você</p>
+    <div class="hero-tape-strip" aria-hidden="true"></div>
+  </section>
+
+  <!-- ============================================
+       2. WALKMAN PLAYER
+  ============================================ -->
+  <section class="walkman-section" id="player">
+    <h2 class="section-kicker">▸ toca fita</h2>
+
+    <div class="walkman" id="walkman">
+      <div class="walkman-body">
+
+        <div class="walkman-top-row">
+          <span class="walkman-brand">STÉREO&nbsp;CASSETTE</span>
+          <span class="walkman-model">WM&nbsp;·&nbsp;92</span>
+        </div>
+
+        <div class="cassette-window">
+          <div class="cassette">
+            <div class="reel reel-left" id="reel-left">
+              <div class="reel-hub"></div>
+            </div>
+
+            <div class="tape-label">
+              <span class="label-title">Última Romântica</span>
+              <span class="label-sub">lado A</span>
+            </div>
+
+            <div class="reel reel-right" id="reel-right">
+              <div class="reel-hub"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="walkman-mid-row">
+          <div class="vu-meter" id="vu-meter" aria-hidden="true">
+            <span class="vu-bar"></span>
+            <span class="vu-bar"></span>
+            <span class="vu-bar"></span>
+            <span class="vu-bar"></span>
+            <span class="vu-bar"></span>
+            <span class="vu-bar"></span>
+            <span class="vu-bar"></span>
+            <span class="vu-bar"></span>
+          </div>
+
+          <div class="tape-counter">
+            <span class="counter-label">CONTADOR</span>
+            <div class="counter-digits" id="tape-counter">0000</div>
+          </div>
+        </div>
+
+        <div class="progress-row">
+          <span class="time-stamp" id="time-current">0:00</span>
+          <input type="range" id="seek-bar" class="seek-bar" min="0" max="100" step="0.1" value="0" aria-label="Progresso da fita">
+          <span class="time-stamp" id="time-duration">0:00</span>
+        </div>
+
+        <div class="controls-row">
+          <button class="ctrl-btn" id="btn-back" type="button" aria-label="Voltar 15 segundos">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 6 3 12l8 6V6Z"/><path d="M20 6l-8 6 8 6V6Z"/></svg>
+          </button>
+          <button class="ctrl-btn play-btn" id="btn-play" type="button" aria-label="Reproduzir">
+            <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4l14 8-14 8V4Z"/></svg>
+            <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+          </button>
+          <button class="ctrl-btn" id="btn-forward" type="button" aria-label="Avançar 15 segundos">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 6l8 6-8 6V6Z"/><path d="M4 6l8 6-8 6V6Z"/></svg>
+          </button>
+        </div>
+
+        <div class="volume-row">
+          <span class="volume-label">VOL</span>
+          <div class="volume-knob" id="volume-knob" tabindex="0" role="slider" aria-label="Volume" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70">
+            <div class="knob-face">
+              <div class="knob-indicator"></div>
+            </div>
+          </div>
+          <span class="volume-label volume-label-min">min</span>
+        </div>
+      </div>
+
+      <!-- Fone de ouvido, decorativo -->
+      <div class="headphones" aria-hidden="true">
+        <div class="headphone-wire"></div>
+        <div class="headphone-cup headphone-l"></div>
+        <div class="headphone-cup headphone-r"></div>
+      </div>
+    </div>
+
+    <!--
+      ÁUDIO — TROQUE AQUI
+      Substitua "audio/ultima-romantica.mp3" pelo arquivo final
+      exportado do Adobe Audition. Mantenha o mesmo caminho/pasta
+      ou atualize o "src" abaixo de acordo.
+    -->
+    <audio id="audio-player" src="audio/ultima-romantica.mp3" preload="metadata"></audio>
+  </section>
+
+  <!-- ============================================
+       3. PLAYLIST DO SPOTIFY
+  ============================================ -->
+  <section class="spotify-section" id="spotify">
+    <h2 class="section-kicker">▸ continue ouvindo</h2>
+    <p class="spotify-invite">se quiser esticar esse momento, a playlist completa tá te esperando no Spotify.</p>
+
+    <div class="boombox">
+      <div class="boombox-speaker" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
+      </div>
+
+      <div class="boombox-screen">
+        <!--
+          SPOTIFY — TROQUE AQUI
+          Substitua PLAYLIST_ID pelo ID real da sua playlist do Spotify.
+          Exemplo de URL da playlist: https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M
+          O ID é o trecho depois de "/playlist/": 37i9dQZF1DXcBWIGoYBM5M
+        -->
+        <iframe
+          title="Playlist do Spotify — Última Romântica"
+          src="https://open.spotify.com/embed/playlist/PLAYLIST_ID?utm_source=generator&theme=0"
+          width="100%"
+          height="352"
+          frameborder="0"
+          allowfullscreen=""
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy">
+        </iframe>
+      </div>
+
+      <div class="boombox-speaker" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       4. LINER NOTES / FAIXAS (acordeão)
+  ============================================ -->
+  <section class="liner-notes" id="liner-notes">
+    <h2 class="section-kicker">▸ encarte da fita</h2>
+
+    <div class="accordion" id="accordion">
+
+      <div class="accordion-item">
+        <button class="accordion-header" type="button" aria-expanded="false">
+          <span class="track-number">01</span>
+          <span class="track-title">Divas do Amor</span>
+          <span class="accordion-icon">▸</span>
+        </button>
+        <div class="accordion-panel">
+          <!-- Preencha aqui as faixas deste bloco -->
+          <ul class="track-list"></ul>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" type="button" aria-expanded="false">
+          <span class="track-number">02</span>
+          <span class="track-title">Apaixonada em PT-BR</span>
+          <span class="accordion-icon">▸</span>
+        </button>
+        <div class="accordion-panel">
+          <!-- Preencha aqui as faixas deste bloco -->
+          <ul class="track-list"></ul>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" type="button" aria-expanded="false">
+          <span class="track-number">03</span>
+          <span class="track-title">Pra Buscar na Memória</span>
+          <span class="accordion-icon">▸</span>
+        </button>
+        <div class="accordion-panel">
+          <!-- Preencha aqui as faixas deste bloco -->
+          <ul class="track-list"></ul>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" type="button" aria-expanded="false">
+          <span class="track-number">04</span>
+          <span class="track-title">Indies Também Amam</span>
+          <span class="accordion-icon">▸</span>
+        </button>
+        <div class="accordion-panel">
+          <!-- Preencha aqui as faixas deste bloco -->
+          <ul class="track-list"></ul>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" type="button" aria-expanded="false">
+          <span class="track-number">05</span>
+          <span class="track-title">Últimas Românticas</span>
+          <span class="accordion-icon">▸</span>
+        </button>
+        <div class="accordion-panel">
+          <!-- Preencha aqui as faixas deste bloco -->
+          <ul class="track-list"></ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+       5. CARTA FINAL
+  ============================================ -->
+  <section class="letter-section" id="letter">
+    <div class="letter-paper">
+      <p class="letter-date">
+        <!-- DATA — troque pela data do aniversário de namoro -->
+        13 de agosto
+      </p>
+
+      <div class="letter-text">
+        <!--
+          CARTA — escreva aqui o seu texto de amor.
+          Pode usar quantos parágrafos <p> quiser.
+        -->
+        <p>Escreva aqui a sua carta...</p>
+      </div>
+
+      <p class="letter-signature">com amor, sempre.</p>
+    </div>
+  </section>
+
+  <!-- ============================================
+       6. RODAPÉ
+  ============================================ -->
+  <footer class="site-footer">
+    <p>
+      <!-- APELIDOS — troque pelos nomes/apelidos do casal -->
+      [seu nome] &amp; [nome dela] · 2026
+    </p>
+  </footer>
+
+</main>
+
+<script src="script.js"></script>
+
+<!--
+========================================================================
+COMO RODAR LOCALMENTE
+========================================================================
+Este site é 100% estático (HTML, CSS e JS puros), sem build e sem
+dependências instaladas localmente. Para rodar:
+
+1. Abra a pasta no terminal e suba um servidor local simples, por ex.:
+     python3 -m http.server 8000
+   (ou use a extensão "Live Server" do VS Code)
+2. Acesse http://localhost:8000 no navegador.
+
+Abrir o index.html direto com duplo clique também funciona na maioria
+dos navegadores, mas alguns recursos (como carregar o áudio local)
+podem se comportar melhor com um servidor local.
+
+========================================================================
+COMO FAZER DEPLOY
+========================================================================
+Netlify:
+  - Arraste a pasta inteira do projeto para https://app.netlify.com/drop
+  - Ou conecte o repositório e faça deploy automático.
+
+Vercel:
+  - vercel.com/new → importe a pasta/repositório → deploy (não precisa
+    configurar build command, é site estático).
+
+GitHub Pages:
+  - Suba os arquivos para um repositório GitHub.
+  - Em Settings → Pages, selecione a branch e a pasta raiz.
+
+ANTES DE PUBLICAR, lembre de:
+  - Trocar /audio/ultima-romantica.mp3 pelo arquivo final.
+  - Trocar PLAYLIST_ID (seção Spotify) pelo ID real da sua playlist.
+  - Preencher as 25 faixas nos 5 blocos do "encarte da fita".
+  - Escrever o texto da carta final e a data do aniversário.
+  - Trocar os nomes/apelidos no rodapé.
+  - Se quiser uma camada extra (e bem simples) de privacidade além do
+    "noindex, nofollow", veja o comentário sobre prompt() de senha no
+    topo do arquivo script.js — mas para segurança de verdade, prefira
+    configurar proteção por senha direto no Netlify/Vercel.
+========================================================================
+-->
+</body>
+</html>
