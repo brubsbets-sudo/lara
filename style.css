@@ -68,10 +68,38 @@ a, button {
   height: 120%;
   pointer-events: none;
   z-index: 9990;
-  opacity: 0.06;
+  opacity: 0.11;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   animation: grain-shift 8s steps(8) infinite;
+}
+
+/* trama de pontinhos (halftone), tipo capa de revista/K7 dos anos 90 */
+.dot-texture-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9989;
+  opacity: 0.18;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Ccircle cx='2' cy='2' r='1.4' fill='%23ffb627' fill-opacity='0.9'/%3E%3C/svg%3E");
+  background-size: 28px 28px;
+}
+
+/* linhas diagonais bem sutis, reforçando a textura de fundo sem competir com o conteúdo */
+.diagonal-texture-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9989;
+  mix-blend-mode: soft-light;
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(255, 141, 227, 0.14) 0px,
+    rgba(255, 141, 227, 0.14) 1px,
+    transparent 1px,
+    transparent 14px
+  );
 }
 
 @keyframes grain-shift {
@@ -225,6 +253,7 @@ section {
    ============================================================ */
 
 .hero {
+  position: relative;
   padding-top: 4rem;
   text-align: center;
   border-bottom: none;
@@ -299,10 +328,149 @@ section {
 }
 
 /* ============================================================
+   SELO DE EDIÇÃO ESPECIAL
+   ============================================================ */
+
+.anniversary-seal {
+  position: absolute;
+  top: 0.5rem;
+  right: 4%;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffe9b8, var(--gold) 55%, var(--orange-sunset) 100%);
+  border: 3px dashed var(--ink);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1;
+  color: var(--ink);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5), inset 0 0 0 2px rgba(255, 255, 255, 0.5);
+  z-index: 2;
+  animation: seal-wiggle 4s ease-in-out infinite;
+}
+
+@keyframes seal-wiggle {
+  0%, 100% { transform: rotate(-10deg); }
+  50% { transform: rotate(-5deg); }
+}
+
+.seal-years {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 1.9rem;
+}
+
+.seal-label {
+  font-family: var(--font-script);
+  font-size: 1rem;
+  margin-top: -0.2rem;
+}
+
+.seal-sub {
+  font-family: var(--font-pixel-heavy);
+  font-size: 0.38rem;
+  letter-spacing: 0.06em;
+  margin-top: 0.35rem;
+  max-width: 76%;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   ELEMENTOS DECORATIVOS — miudezas anos 90 espalhadas pelo fundo
+   ============================================================ */
+
+.decor-shape {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.decor-star {
+  top: 8%;
+  right: 8%;
+  font-size: 1.8rem;
+  color: var(--gold);
+  text-shadow: 0 0 8px rgba(255, 200, 94, 0.6);
+  animation: decor-float 5s ease-in-out infinite;
+}
+.decor-star::before { content: "✦"; }
+
+.decor-star-sm {
+  top: -0.6rem;
+  left: 6%;
+  font-size: 1.1rem;
+}
+
+.decor-ring {
+  top: 32%;
+  left: 4%;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 3px solid var(--pink-neon);
+  opacity: 0.4;
+  animation: decor-float 6s ease-in-out infinite;
+}
+
+.decor-squiggle {
+  top: 6%;
+  right: -8px;
+  width: 70px;
+  height: 26px;
+  opacity: 0.55;
+  background-repeat: no-repeat;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='70' height='26'%3E%3Cpath d='M2 13 Q12 2 22 13 T42 13 T62 13' stroke='%23ffb627' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+.decor-zigzag {
+  bottom: 10%;
+  left: -6px;
+  width: 60px;
+  height: 14px;
+  opacity: 0.45;
+  background-image:
+    linear-gradient(135deg, var(--pink-neon) 25%, transparent 25%),
+    linear-gradient(-135deg, var(--pink-neon) 25%, transparent 25%);
+  background-size: 14px 14px;
+}
+
+.decor-triangle {
+  top: 10%;
+  left: -4px;
+  width: 0;
+  height: 0;
+  border-left: 16px solid transparent;
+  border-right: 16px solid transparent;
+  border-bottom: 26px solid var(--orange-sunset);
+  opacity: 0.35;
+  transform: rotate(12deg);
+}
+
+.decor-note {
+  bottom: 6%;
+  right: -6px;
+  font-size: 2rem;
+  color: var(--pink-soft);
+  opacity: 0.5;
+  animation: decor-float 5.5s ease-in-out infinite;
+}
+.decor-note::before { content: "♪"; }
+
+@keyframes decor-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ============================================================
    2. WALKMAN
    ============================================================ */
 
 .walkman-section {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -311,7 +479,7 @@ section {
 .walkman {
   position: relative;
   width: 100%;
-  max-width: 300px;
+  max-width: 440px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -320,7 +488,7 @@ section {
 /* fone de ouvido apoiado em cima do aparelho, como na referência */
 .wm-headphones {
   position: relative;
-  width: 78%;
+  width: 46%;
   height: 52px;
   z-index: 2;
   pointer-events: none;
@@ -364,9 +532,13 @@ section {
   width: 100%;
   margin-top: -14px;
   z-index: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.9rem;
   background: linear-gradient(185deg, var(--wm-steel-light) 0%, var(--wm-steel-mid) 55%, var(--wm-steel-deep) 100%);
   border-radius: 20px;
-  padding: 1.4rem 1rem 1.2rem;
+  padding: 1.2rem 1.4rem 1.2rem 1.2rem;
   box-shadow:
     0 18px 40px rgba(0, 0, 0, 0.55),
     inset 0 2px 0 rgba(255, 255, 255, 0.55),
@@ -375,20 +547,10 @@ section {
   position: relative;
 }
 
-.wm-top-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  padding-bottom: 0.7rem;
-  font-family: var(--font-pixel);
-  font-size: 0.8rem;
-  letter-spacing: 0.15em;
-  color: var(--ink);
-  opacity: 0.8;
-}
-
 .wm-rec-dot {
+  position: absolute;
+  top: 12px;
+  left: 14px;
   width: 7px;
   height: 7px;
   border-radius: 50%;
@@ -396,21 +558,15 @@ section {
   box-shadow: 0 0 5px 1px rgba(255, 148, 72, 0.8);
 }
 
-.wm-window-row {
+.wm-window-col {
+  flex: 0 1 60%;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-}
-
-.wm-arrow-icon {
-  color: var(--wm-orange);
-  font-size: 0.9rem;
-  opacity: 0.85;
-  flex-shrink: 0;
+  min-width: 0;
 }
 
 .cassette-window {
-  flex: 1;
+  width: 100%;
   background: var(--wm-navy);
   border-radius: 12px;
   padding: 0.9rem;
@@ -425,14 +581,14 @@ section {
   justify-content: space-between;
   background: linear-gradient(160deg, #2a1240, #170a26);
   border-radius: 6px;
-  padding: 1rem 1rem 2.4rem;
-  min-height: 130px;
+  padding: 0.9rem;
+  min-height: 108px;
   border: 1px solid rgba(255, 182, 39, 0.2);
 }
 
 .reel {
-  width: 46px;
-  height: 46px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background:
     radial-gradient(circle at center, transparent 0 35%, rgba(255, 255, 255, 0.06) 36% 40%, transparent 41%),
@@ -446,8 +602,8 @@ section {
 }
 
 .reel-hub {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background: var(--gold);
   box-shadow: inset 0 0 0 3px var(--ink), inset 0 0 0 5px rgba(255, 182, 39, 0.5);
@@ -456,11 +612,11 @@ section {
 .tape-label {
   flex: 1;
   min-width: 0;
-  margin: 0 0.5rem;
+  margin: 0 0.3rem;
   background: var(--cream);
   color: var(--ink);
   border-radius: 3px;
-  padding: 0.3rem 0.3rem 0.4rem;
+  padding: 0.3rem 0.15rem 0.4rem;
   text-align: center;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
   transform: rotate(-1deg);
@@ -470,10 +626,11 @@ section {
 .label-title {
   display: block;
   font-family: var(--font-script);
-  font-size: 1rem;
-  line-height: 1.1;
+  font-size: 0.95rem;
+  line-height: 1.15;
   color: var(--purple-deep);
-  overflow-wrap: break-word;
+  overflow-wrap: normal;
+  hyphens: none;
 }
 
 .label-sub {
@@ -486,13 +643,20 @@ section {
   margin-top: 0.15rem;
 }
 
+.wm-controls-col {
+  flex: 1 1 40%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.7rem;
+}
+
 .wm-readout {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
-  margin-top: 0.9rem;
-  padding: 0 0.1rem;
+  gap: 0.6rem;
 }
 
 /* VU meter */
@@ -548,7 +712,6 @@ section {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-top: 1rem;
 }
 
 .time-stamp {
@@ -592,8 +755,7 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.9rem;
-  margin-top: 1.1rem;
+  gap: 0.6rem;
 }
 
 .ctrl-btn {
@@ -657,20 +819,11 @@ section {
   50% { transform: scale(1.05); }
 }
 
-.wm-wordmark {
-  text-align: center;
-  margin-top: 1rem;
-  font-family: var(--font-pixel-heavy);
-  font-size: 0.55rem;
-  letter-spacing: 0.3em;
-  color: var(--wm-navy);
-  opacity: 0.5;
-}
-
 /* rodinha de volume, encaixada na lateral do aparelho como na referência */
 .wm-volume-wheel {
   position: absolute;
-  top: 34%;
+  top: auto;
+  bottom: 14px;
   right: -15px;
   width: 34px;
   height: 34px;
@@ -704,6 +857,7 @@ section {
    ============================================================ */
 
 .spotify-section {
+  position: relative;
   text-align: center;
 }
 
@@ -765,6 +919,10 @@ section {
 /* ============================================================
    4. LINER NOTES (acordeão)
    ============================================================ */
+
+.liner-notes {
+  position: relative;
+}
 
 .accordion-item {
   border: 1px solid rgba(255, 182, 39, 0.3);
@@ -844,6 +1002,7 @@ section {
    ============================================================ */
 
 .letter-section {
+  position: relative;
   display: flex;
   justify-content: center;
 }
@@ -915,15 +1074,16 @@ section {
   .site-content { padding: 0 1rem 3rem; }
   section { padding: 3rem 0; }
 
-  .reel { width: 46px; height: 46px; }
-  .reel-hub { width: 16px; height: 16px; }
-  .cassette { min-height: 110px; padding: 0.8rem 0.8rem 2rem; }
-  .label-title { font-size: 1.1rem; }
+  .ctrl-btn { width: 44px; height: 34px; }
+  .play-btn { width: 54px; height: 42px; }
 
-  .ctrl-btn { width: 46px; height: 36px; }
-  .play-btn { width: 56px; height: 44px; }
+  /* em telas pequenas, o chassi horizontal vira duas fileiras empilhadas pra não ficar espremido */
+  .walkman { max-width: 320px; }
+  .wm-chassis { flex-direction: column; }
+  .wm-window-col,
+  .wm-controls-col { flex: 1 1 auto; }
+  .cassette { min-height: 100px; padding: 0.7rem 0.7rem 1.8rem; }
 
-  .walkman { max-width: 260px; }
   .wm-volume-wheel { width: 28px; height: 28px; right: -12px; }
   .wm-earcup { width: 26px; height: 26px; }
 
@@ -932,13 +1092,32 @@ section {
   .boombox-screen { flex-basis: 100%; }
 
   .letter-paper { padding: 1.8rem 1.4rem; }
+
+  .anniversary-seal {
+    width: 66px;
+    height: 66px;
+    top: -0.3rem;
+    right: 0;
+  }
+  .seal-years { font-size: 1.4rem; }
+  .seal-label { font-size: 0.78rem; }
+  .seal-sub { font-size: 0.32rem; }
+
+  .decor-squiggle,
+  .decor-triangle,
+  .decor-zigzag { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .grain-overlay,
   .on-air-dot,
   .type-cursor,
-  .tuning-label {
+  .tuning-label,
+  .anniversary-seal,
+  .decor-star,
+  .decor-ring,
+  .decor-note,
+  .play-btn.is-playing {
     animation: none !important;
   }
   html { scroll-behavior: auto; }

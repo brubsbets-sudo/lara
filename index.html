@@ -35,6 +35,8 @@
 </div>
 
 <!-- Overlays de textura, cobrindo a tela toda o tempo todo -->
+<div class="dot-texture-overlay" aria-hidden="true"></div>
+<div class="diagonal-texture-overlay" aria-hidden="true"></div>
 <div class="grain-overlay" aria-hidden="true"></div>
 <div class="scanlines-overlay" aria-hidden="true"></div>
 
@@ -44,19 +46,28 @@
        1. HERO
   ============================================ -->
   <section class="hero" id="hero">
+    <!-- Selo de edição especial — troque o número se um dia comemorar outro aniversário com o mesmo site -->
+    <div class="anniversary-seal" role="img" aria-label="Selo: edição especial de 3 anos">
+      <span class="seal-years">3</span>
+      <span class="seal-label">anos</span>
+      <span class="seal-sub">edição especial</span>
+    </div>
+
     <div class="on-air" aria-hidden="true"><span class="on-air-dot"></span>NO AR</div>
     <h1 class="hero-title">
       <span id="typewriter"></span><span class="type-cursor">|</span>
     </h1>
-    <p class="hero-subtitle">um programa de rádio, gravado bem devagarzinho, só pra você</p>
+    <p class="hero-subtitle">trazendo você pra perto, uma música de cada vez</p>
     <div class="hero-tape-strip" aria-hidden="true"></div>
+
+    <span class="decor-shape decor-star" aria-hidden="true"></span>
+    <span class="decor-shape decor-ring" aria-hidden="true"></span>
   </section>
 
   <!-- ============================================
        2. WALKMAN PLAYER
   ============================================ -->
   <section class="walkman-section" id="player">
-    <h2 class="section-kicker">▸ toca fita</h2>
 
     <div class="walkman" id="walkman">
 
@@ -69,14 +80,9 @@
       </div>
 
       <div class="wm-chassis">
+        <span class="wm-rec-dot" aria-hidden="true"></span>
 
-        <div class="wm-top-row">
-          <span class="wm-rec-dot" aria-hidden="true"></span>
-          <span class="wm-brand">STÉREO CASSETTE</span>
-        </div>
-
-        <div class="wm-window-row">
-          <span class="wm-arrow-icon" aria-hidden="true">▲</span>
+        <div class="wm-window-col">
           <div class="cassette-window">
             <div class="cassette">
               <div class="reel reel-left" id="reel-left">
@@ -95,44 +101,44 @@
           </div>
         </div>
 
-        <div class="wm-readout">
-          <div class="vu-meter" id="vu-meter" aria-hidden="true">
-            <span class="vu-bar"></span>
-            <span class="vu-bar"></span>
-            <span class="vu-bar"></span>
-            <span class="vu-bar"></span>
-            <span class="vu-bar"></span>
-            <span class="vu-bar"></span>
-            <span class="vu-bar"></span>
-            <span class="vu-bar"></span>
+        <div class="wm-controls-col">
+          <div class="wm-readout">
+            <div class="vu-meter" id="vu-meter" aria-hidden="true">
+              <span class="vu-bar"></span>
+              <span class="vu-bar"></span>
+              <span class="vu-bar"></span>
+              <span class="vu-bar"></span>
+              <span class="vu-bar"></span>
+              <span class="vu-bar"></span>
+              <span class="vu-bar"></span>
+              <span class="vu-bar"></span>
+            </div>
+
+            <div class="tape-counter">
+              <span class="counter-label">CONTADOR</span>
+              <div class="counter-digits" id="tape-counter">0000</div>
+            </div>
           </div>
 
-          <div class="tape-counter">
-            <span class="counter-label">CONTADOR</span>
-            <div class="counter-digits" id="tape-counter">0000</div>
+          <div class="progress-row">
+            <span class="time-stamp" id="time-current">0:00</span>
+            <input type="range" id="seek-bar" class="seek-bar" min="0" max="100" step="0.1" value="0" aria-label="Progresso da fita">
+            <span class="time-stamp" id="time-duration">0:00</span>
+          </div>
+
+          <div class="wm-transport">
+            <button class="ctrl-btn" id="btn-back" type="button" aria-label="Voltar 15 segundos">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 6 3 12l8 6V6Z"/><path d="M20 6l-8 6 8 6V6Z"/></svg>
+            </button>
+            <button class="ctrl-btn play-btn" id="btn-play" type="button" aria-label="Reproduzir">
+              <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4l14 8-14 8V4Z"/></svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+            </button>
+            <button class="ctrl-btn" id="btn-forward" type="button" aria-label="Avançar 15 segundos">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 6l8 6-8 6V6Z"/><path d="M4 6l8 6-8 6V6Z"/></svg>
+            </button>
           </div>
         </div>
-
-        <div class="progress-row">
-          <span class="time-stamp" id="time-current">0:00</span>
-          <input type="range" id="seek-bar" class="seek-bar" min="0" max="100" step="0.1" value="0" aria-label="Progresso da fita">
-          <span class="time-stamp" id="time-duration">0:00</span>
-        </div>
-
-        <div class="wm-transport">
-          <button class="ctrl-btn" id="btn-back" type="button" aria-label="Voltar 15 segundos">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 6 3 12l8 6V6Z"/><path d="M20 6l-8 6 8 6V6Z"/></svg>
-          </button>
-          <button class="ctrl-btn play-btn" id="btn-play" type="button" aria-label="Reproduzir">
-            <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4l14 8-14 8V4Z"/></svg>
-            <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
-          </button>
-          <button class="ctrl-btn" id="btn-forward" type="button" aria-label="Avançar 15 segundos">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 6l8 6-8 6V6Z"/><path d="M4 6l8 6-8 6V6Z"/></svg>
-          </button>
-        </div>
-
-        <div class="wm-wordmark">AMOR&nbsp;STÉREO</div>
 
         <div class="wm-volume-wheel" id="volume-knob" tabindex="0" role="slider" aria-label="Volume" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70">
           <div class="knob-face">
@@ -141,6 +147,8 @@
         </div>
       </div>
     </div>
+
+    <span class="decor-shape decor-squiggle" aria-hidden="true"></span>
 
     <!--
       ÁUDIO — TROQUE AQUI
@@ -188,6 +196,9 @@
         <span></span><span></span><span></span><span></span>
       </div>
     </div>
+
+    <span class="decor-shape decor-zigzag" aria-hidden="true"></span>
+    <span class="decor-shape decor-triangle" aria-hidden="true"></span>
   </section>
 
   <!-- ============================================
@@ -259,6 +270,8 @@
       </div>
 
     </div>
+
+    <span class="decor-shape decor-note" aria-hidden="true"></span>
   </section>
 
   <!-- ============================================
@@ -281,6 +294,8 @@
 
       <p class="letter-signature">com amor, sempre.</p>
     </div>
+
+    <span class="decor-shape decor-star decor-star-sm" aria-hidden="true"></span>
   </section>
 
   <!-- ============================================
