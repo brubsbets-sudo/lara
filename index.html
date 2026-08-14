@@ -12,10 +12,10 @@
 
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 
-<!-- Google Fonts: pixelada/retrô (VT323, Press Start 2P) + romântica (Playfair Display, Caveat) -->
+<!-- Google Fonts: pixelada/retrô (VT323, Press Start 2P) + romântica (Playfair Display, Dancing Script) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,600&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,600&family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="style.css">
 </head>
@@ -46,13 +46,6 @@
        1. HERO
   ============================================ -->
   <section class="hero" id="hero">
-    <!-- Selo de edição especial — troque o número se um dia comemorar outro aniversário com o mesmo site -->
-    <div class="anniversary-seal" role="img" aria-label="Selo: edição especial de 3 anos">
-      <span class="seal-years">3</span>
-      <span class="seal-label">anos</span>
-      <span class="seal-sub">edição especial</span>
-    </div>
-
     <div class="on-air" aria-hidden="true"><span class="on-air-dot"></span>NO AR</div>
     <h1 class="hero-title">
       <span id="typewriter"></span><span class="type-cursor">|</span>
@@ -63,7 +56,6 @@
     <span class="decor-shape decor-sparkle" aria-hidden="true"></span>
     <span class="decor-shape decor-ring" aria-hidden="true"></span>
     <span class="decor-shape decor-halftone decor-halftone-pink" aria-hidden="true"></span>
-    <span class="sticker-badge badge-pink" style="top: 34%; left: -0.4rem; transform: rotate(-8deg);" aria-hidden="true">rewind ★</span>
   </section>
 
   <!-- ============================================
@@ -86,9 +78,10 @@
         <div class="wm-panel">
           <div class="wm-window-col">
             <div class="cassette">
+              <!-- etiqueta em branco de propósito — escreva algo aqui se quiser -->
               <div class="tape-label">
-                <span class="label-title">Última Romântica</span>
-                <span class="label-sub">lado A</span>
+                <span class="label-title"></span>
+                <span class="label-sub"></span>
               </div>
 
               <div class="cassette-reels">
@@ -189,15 +182,9 @@
       </div>
 
       <div class="boombox-screen">
-        <!--
-          SPOTIFY — TROQUE AQUI
-          Substitua PLAYLIST_ID pelo ID real da sua playlist do Spotify.
-          Exemplo de URL da playlist: https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M
-          O ID é o trecho depois de "/playlist/": 37i9dQZF1DXcBWIGoYBM5M
-        -->
         <iframe
           title="Playlist do Spotify — Última Romântica"
-          src="https://open.spotify.com/embed/playlist/PLAYLIST_ID?utm_source=generator&theme=0"
+          src="https://open.spotify.com/embed/playlist/66HPFL2OHhs8Lxdt6F7Woz?utm_source=generator&theme=0"
           width="100%"
           height="352"
           frameborder="0"
@@ -299,7 +286,7 @@
     <div class="letter-paper">
       <p class="letter-date">
         <!-- DATA — troque pela data do aniversário de namoro -->
-        13 de agosto
+        14 de agosto
       </p>
 
       <div class="letter-text">
@@ -307,10 +294,11 @@
           CARTA — escreva aqui o seu texto de amor.
           Pode usar quantos parágrafos <p> quiser.
         -->
-        <p>Escreva aqui a sua carta...</p>
+        <p>Feliz aniversário de namoro, dengo.</p>
+        <p>Te amo demais.</p>
       </div>
 
-      <p class="letter-signature">com amor, sempre.</p>
+      <p class="letter-signature">Sempre sua, Bruna Barros.</p>
     </div>
 
     <span class="decor-shape decor-sparkle decor-sparkle-sm" aria-hidden="true"></span>
@@ -366,9 +354,7 @@ GitHub Pages:
 
 ANTES DE PUBLICAR, lembre de:
   - Trocar /audio/ultima-romantica.mp3 pelo arquivo final.
-  - Trocar PLAYLIST_ID (seção Spotify) pelo ID real da sua playlist.
   - Preencher as 25 faixas nos 5 blocos do "encarte da fita".
-  - Escrever o texto da carta final e a data do aniversário.
   - Trocar os nomes/apelidos no rodapé.
   - Se quiser uma camada extra (e bem simples) de privacidade além do
     "noindex, nofollow", veja o comentário sobre prompt() de senha no
