@@ -40,7 +40,7 @@
   --font-pixel: 'Press Start 2P', monospace;
   --font-pixel-heavy: 'Press Start 2P', monospace;
   --font-title: 'Playfair Display', serif;
-  --font-script: 'Dancing Script', cursive;
+  --font-script: 'Special Elite', monospace;
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -323,7 +323,9 @@ section {
 
 .hero-subtitle {
   font-family: var(--font-script);
-  font-size: clamp(1.3rem, 4vw, 1.8rem);
+  font-size: clamp(0.85rem, 2.6vw, 1.05rem);
+  letter-spacing: 0.02em;
+  line-height: 1.7;
   color: var(--pink-soft);
   margin: 0 auto;
   max-width: 30ch;
@@ -344,139 +346,16 @@ section {
 }
 
 /* ============================================================
-   ELEMENTOS DECORATIVOS — miudezas anos 90 espalhadas pelo fundo
+   ELEMENTOS DECORATIVOS
+   Removidos por enquanto — troque por PNGs próprios aqui.
+   Classes disponíveis pra reaproveitar o slot: um <img> ou <span>
+   com position:absolute dentro de uma seção com position:relative.
    ============================================================ */
 
 .decor-shape {
   position: absolute;
   pointer-events: none;
   z-index: 0;
-}
-
-/* faísca/sparkle recortada, tipo adesivo de colagem — SVG simples de 4 pontas */
-.decor-sparkle {
-  top: auto;
-  bottom: 8%;
-  right: 10%;
-  width: 38px;
-  height: 38px;
-  opacity: 0.85;
-  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.4));
-  background-repeat: no-repeat;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 0 L19 13 L32 16 L19 19 L16 32 L13 19 L0 16 L13 13 Z' fill='%23ffc85e'/%3E%3C/svg%3E");
-  animation: decor-float 5s ease-in-out infinite;
-}
-
-.decor-sparkle-sm {
-  top: -0.6rem;
-  left: 6%;
-  width: 24px;
-  height: 24px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 0 L19 13 L32 16 L19 19 L16 32 L13 19 L0 16 L13 13 Z' fill='%23ff4bd8'/%3E%3C/svg%3E");
-}
-
-.decor-ring {
-  top: 32%;
-  left: 4%;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  border: 3px solid var(--pink-neon);
-  opacity: 0.5;
-  animation: decor-float 6s ease-in-out infinite;
-}
-
-/* blob com trama de pontinhos (halftone), tipo recorte de foto de revista */
-.decor-halftone {
-  width: 64px;
-  height: 64px;
-  border-radius: 46% 54% 61% 39% / 45% 40% 60% 55%;
-  opacity: 0.7;
-  background-image: radial-gradient(circle, currentColor 32%, transparent 34%);
-  background-size: 7px 7px;
-}
-
-.decor-halftone-orange {
-  color: var(--orange-sunset);
-  top: 4%;
-  right: -14px;
-}
-
-.decor-halftone-pink {
-  color: var(--pink-neon);
-  bottom: 8%;
-  left: -16px;
-  width: 50px;
-  height: 50px;
-  background-size: 6px 6px;
-}
-
-.decor-squiggle {
-  top: 6%;
-  right: -8px;
-  width: 70px;
-  height: 26px;
-  opacity: 0.6;
-  background-repeat: no-repeat;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='70' height='26'%3E%3Cpath d='M2 13 Q12 2 22 13 T42 13 T62 13' stroke='%23ffb627' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-}
-
-.decor-zigzag {
-  bottom: 10%;
-  left: -6px;
-  width: 60px;
-  height: 14px;
-  opacity: 0.5;
-  background-image:
-    linear-gradient(135deg, var(--pink-neon) 25%, transparent 25%),
-    linear-gradient(-135deg, var(--pink-neon) 25%, transparent 25%);
-  background-size: 14px 14px;
-}
-
-.decor-triangle {
-  top: 10%;
-  left: -4px;
-  width: 0;
-  height: 0;
-  border-left: 16px solid transparent;
-  border-right: 16px solid transparent;
-  border-bottom: 26px solid var(--orange-sunset);
-  opacity: 0.4;
-  transform: rotate(12deg);
-}
-
-.decor-note {
-  bottom: 6%;
-  right: -6px;
-  font-size: 2rem;
-  color: var(--pink-soft);
-  opacity: 0.6;
-  animation: decor-float 5.5s ease-in-out infinite;
-}
-.decor-note::before { content: "♪"; }
-
-/* adesivos de texto, tipo etiqueta de colagem/scrapbook */
-.sticker-badge {
-  position: absolute;
-  font-family: var(--font-pixel-heavy);
-  font-size: 0.55rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  padding: 0.4rem 0.65rem;
-  border-radius: 4px;
-  white-space: nowrap;
-  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.35), inset 0 0 0 2px rgba(255, 255, 255, 0.25);
-  z-index: 0;
-  pointer-events: none;
-}
-
-.badge-pink { background: var(--pink-neon); color: var(--cream); }
-.badge-gold { background: var(--gold); color: var(--ink); }
-.badge-orange { background: var(--orange-sunset); color: var(--ink); }
-
-@keyframes decor-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
 }
 
 /* ============================================================
@@ -555,8 +434,8 @@ section {
 .label-title {
   display: block;
   font-family: var(--font-script);
-  font-size: 1rem;
-  line-height: 1.1;
+  font-size: 0.8rem;
+  line-height: 1.3;
   color: var(--purple-deep);
   overflow-wrap: normal;
   hyphens: none;
@@ -869,7 +748,9 @@ section {
 
 .spotify-invite {
   font-family: var(--font-script);
-  font-size: 1.4rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  line-height: 1.7;
   color: var(--pink-soft);
   max-width: 34ch;
   margin: 0 auto 2rem;
@@ -1037,8 +918,9 @@ section {
 
 .letter-text {
   font-family: var(--font-script);
-  font-size: 1.6rem;
-  line-height: 1.5;
+  font-size: 1.05rem;
+  line-height: 1.9;
+  letter-spacing: 0.01em;
   color: var(--purple-deep);
 }
 
@@ -1048,7 +930,8 @@ section {
 
 .letter-signature {
   font-family: var(--font-script);
-  font-size: 1.8rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
   text-align: right;
   color: var(--pink-neon);
   margin: 1.5rem 0 0;
@@ -1095,12 +978,6 @@ section {
   .boombox-screen { flex-basis: 100%; }
 
   .letter-paper { padding: 1.8rem 1.4rem; }
-
-  .decor-squiggle,
-  .decor-triangle,
-  .decor-zigzag,
-  .decor-halftone,
-  .sticker-badge { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1108,9 +985,6 @@ section {
   .on-air-dot,
   .type-cursor,
   .tuning-label,
-  .decor-sparkle,
-  .decor-ring,
-  .decor-note,
   .play-btn.is-playing {
     animation: none !important;
   }
