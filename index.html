@@ -82,64 +82,76 @@
       </div>
 
       <div class="wm-chassis">
-        <span class="wm-rec-dot" aria-hidden="true"></span>
 
-        <div class="wm-window-col">
-          <div class="cassette-window">
+        <div class="wm-panel">
+          <div class="wm-window-col">
             <div class="cassette">
-              <div class="reel reel-left" id="reel-left">
-                <div class="reel-hub"></div>
-              </div>
-
               <div class="tape-label">
                 <span class="label-title">Última Romântica</span>
                 <span class="label-sub">lado A</span>
               </div>
 
-              <div class="reel reel-right" id="reel-right">
-                <div class="reel-hub"></div>
+              <div class="cassette-reels">
+                <div class="reel reel-left" id="reel-left">
+                  <div class="reel-hub"></div>
+                </div>
+
+                <div class="tape-window" aria-hidden="true"></div>
+
+                <div class="reel reel-right" id="reel-right">
+                  <div class="reel-hub"></div>
+                </div>
+              </div>
+
+              <div class="cassette-holes" aria-hidden="true">
+                <span></span>
+                <span></span>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="wm-controls-col">
-          <div class="wm-readout">
-            <div class="vu-meter" id="vu-meter" aria-hidden="true">
-              <span class="vu-bar"></span>
-              <span class="vu-bar"></span>
-              <span class="vu-bar"></span>
-              <span class="vu-bar"></span>
-              <span class="vu-bar"></span>
-              <span class="vu-bar"></span>
-              <span class="vu-bar"></span>
-              <span class="vu-bar"></span>
-            </div>
-
+          <div class="wm-speaker-col">
             <div class="tape-counter">
               <span class="counter-label">CONTADOR</span>
               <div class="counter-digits" id="tape-counter">0000</div>
             </div>
+            <div class="wm-speaker-grille" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span>
+            </div>
           </div>
+        </div>
 
-          <div class="progress-row">
-            <span class="time-stamp" id="time-current">0:00</span>
-            <input type="range" id="seek-bar" class="seek-bar" min="0" max="100" step="0.1" value="0" aria-label="Progresso da fita">
-            <span class="time-stamp" id="time-duration">0:00</span>
-          </div>
+        <div class="vu-meter" id="vu-meter" aria-hidden="true">
+          <span class="vu-bar"></span>
+          <span class="vu-bar"></span>
+          <span class="vu-bar"></span>
+          <span class="vu-bar"></span>
+          <span class="vu-bar"></span>
+          <span class="vu-bar"></span>
+          <span class="vu-bar"></span>
+          <span class="vu-bar"></span>
+        </div>
 
-          <div class="wm-transport">
-            <button class="ctrl-btn" id="btn-back" type="button" aria-label="Voltar 15 segundos">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 6 3 12l8 6V6Z"/><path d="M20 6l-8 6 8 6V6Z"/></svg>
-            </button>
-            <button class="ctrl-btn play-btn" id="btn-play" type="button" aria-label="Reproduzir">
-              <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4l14 8-14 8V4Z"/></svg>
-              <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
-            </button>
-            <button class="ctrl-btn" id="btn-forward" type="button" aria-label="Avançar 15 segundos">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 6l8 6-8 6V6Z"/><path d="M4 6l8 6-8 6V6Z"/></svg>
-            </button>
-          </div>
+        <div class="progress-row">
+          <span class="time-stamp" id="time-current">0:00</span>
+          <input type="range" id="seek-bar" class="seek-bar" min="0" max="100" step="0.1" value="0" aria-label="Progresso da fita">
+          <span class="time-stamp" id="time-duration">0:00</span>
+        </div>
+
+        <div class="wm-transport">
+          <button class="ctrl-btn" id="btn-back" type="button" aria-label="Voltar 15 segundos">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 6 3 12l8 6V6Z"/><path d="M20 6l-8 6 8 6V6Z"/></svg>
+          </button>
+          <button class="ctrl-btn play-btn" id="btn-play" type="button" aria-label="Reproduzir">
+            <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4l14 8-14 8V4Z"/></svg>
+            <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+          </button>
+          <button class="ctrl-btn" id="btn-forward" type="button" aria-label="Avançar 15 segundos">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 6l8 6-8 6V6Z"/><path d="M4 6l8 6-8 6V6Z"/></svg>
+          </button>
         </div>
 
         <div class="wm-volume-wheel" id="volume-knob" tabindex="0" role="slider" aria-label="Volume" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70">
