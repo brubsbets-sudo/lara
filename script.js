@@ -187,10 +187,18 @@ document.addEventListener('DOMContentLoaded', () => {
     stopReelSpin();
   });
 
-  audio.addEventListener('loadedmetadata', () => {
+  function updateDuration() {
     seekBar.max = audio.duration || 0;
     timeDuration.textContent = formatTime(audio.duration);
-  });
+  }
+
+  // se os metadados já estiverem prontos (áudio carregou rápido, antes deste
+  // script rodar), o evento "loadedmetadata" já disparou e nunca mais dispara —
+  // por isso checamos o estado atual também, e não só o evento.
+  if (audio.readyState >= 1) {
+    updateDuration();
+  }
+  audio.addEventListener('loadedmetadata', updateDuration);
 
   audio.addEventListener('timeupdate', () => {
     seekBar.value = audio.currentTime;
