@@ -41,7 +41,10 @@ html {
 
 body {
   margin: 0;
-  background: radial-gradient(ellipse at top, #1c3a4e 0%, var(--petrol) 45%, var(--petrol-deep) 100%);
+  background:
+    radial-gradient(ellipse 65% 45% at 82% 6%, rgba(255, 138, 92, 0.4) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 40% at 12% 92%, rgba(122, 58, 168, 0.4) 0%, transparent 60%),
+    radial-gradient(ellipse at top, #1c3a4e 0%, var(--petrol) 45%, var(--petrol-deep) 100%);
   color: var(--cream);
   font-family: var(--font-pixel);
   overflow-x: hidden;
@@ -68,9 +71,10 @@ a, button {
   height: 120%;
   pointer-events: none;
   z-index: 9990;
-  opacity: 0.11;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.22;
+  mix-blend-mode: normal;
+  filter: contrast(1.6);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   animation: grain-shift 8s steps(8) infinite;
 }
 
@@ -389,20 +393,26 @@ section {
   z-index: 0;
 }
 
-.decor-star {
-  top: 8%;
-  right: 8%;
-  font-size: 1.8rem;
-  color: var(--gold);
-  text-shadow: 0 0 8px rgba(255, 200, 94, 0.6);
+/* faísca/sparkle recortada, tipo adesivo de colagem — SVG simples de 4 pontas */
+.decor-sparkle {
+  top: auto;
+  bottom: 8%;
+  right: 10%;
+  width: 38px;
+  height: 38px;
+  opacity: 0.85;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.4));
+  background-repeat: no-repeat;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 0 L19 13 L32 16 L19 19 L16 32 L13 19 L0 16 L13 13 Z' fill='%23ffc85e'/%3E%3C/svg%3E");
   animation: decor-float 5s ease-in-out infinite;
 }
-.decor-star::before { content: "✦"; }
 
-.decor-star-sm {
+.decor-sparkle-sm {
   top: -0.6rem;
   left: 6%;
-  font-size: 1.1rem;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 0 L19 13 L32 16 L19 19 L16 32 L13 19 L0 16 L13 13 Z' fill='%23ff4bd8'/%3E%3C/svg%3E");
 }
 
 .decor-ring {
@@ -412,8 +422,33 @@ section {
   height: 34px;
   border-radius: 50%;
   border: 3px solid var(--pink-neon);
-  opacity: 0.4;
+  opacity: 0.5;
   animation: decor-float 6s ease-in-out infinite;
+}
+
+/* blob com trama de pontinhos (halftone), tipo recorte de foto de revista */
+.decor-halftone {
+  width: 64px;
+  height: 64px;
+  border-radius: 46% 54% 61% 39% / 45% 40% 60% 55%;
+  opacity: 0.7;
+  background-image: radial-gradient(circle, currentColor 32%, transparent 34%);
+  background-size: 7px 7px;
+}
+
+.decor-halftone-orange {
+  color: var(--orange-sunset);
+  top: 4%;
+  right: -14px;
+}
+
+.decor-halftone-pink {
+  color: var(--pink-neon);
+  bottom: 8%;
+  left: -16px;
+  width: 50px;
+  height: 50px;
+  background-size: 6px 6px;
 }
 
 .decor-squiggle {
@@ -421,7 +456,7 @@ section {
   right: -8px;
   width: 70px;
   height: 26px;
-  opacity: 0.55;
+  opacity: 0.6;
   background-repeat: no-repeat;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='70' height='26'%3E%3Cpath d='M2 13 Q12 2 22 13 T42 13 T62 13' stroke='%23ffb627' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
 }
@@ -431,7 +466,7 @@ section {
   left: -6px;
   width: 60px;
   height: 14px;
-  opacity: 0.45;
+  opacity: 0.5;
   background-image:
     linear-gradient(135deg, var(--pink-neon) 25%, transparent 25%),
     linear-gradient(-135deg, var(--pink-neon) 25%, transparent 25%);
@@ -446,7 +481,7 @@ section {
   border-left: 16px solid transparent;
   border-right: 16px solid transparent;
   border-bottom: 26px solid var(--orange-sunset);
-  opacity: 0.35;
+  opacity: 0.4;
   transform: rotate(12deg);
 }
 
@@ -455,10 +490,29 @@ section {
   right: -6px;
   font-size: 2rem;
   color: var(--pink-soft);
-  opacity: 0.5;
+  opacity: 0.6;
   animation: decor-float 5.5s ease-in-out infinite;
 }
 .decor-note::before { content: "♪"; }
+
+/* adesivos de texto, tipo etiqueta de colagem/scrapbook */
+.sticker-badge {
+  position: absolute;
+  font-family: var(--font-pixel-heavy);
+  font-size: 0.55rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.65rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.35), inset 0 0 0 2px rgba(255, 255, 255, 0.25);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.badge-pink { background: var(--pink-neon); color: var(--cream); }
+.badge-gold { background: var(--gold); color: var(--ink); }
+.badge-orange { background: var(--orange-sunset); color: var(--ink); }
 
 @keyframes decor-float {
   0%, 100% { transform: translateY(0); }
@@ -1105,7 +1159,9 @@ section {
 
   .decor-squiggle,
   .decor-triangle,
-  .decor-zigzag { display: none; }
+  .decor-zigzag,
+  .decor-halftone,
+  .sticker-badge { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1114,7 +1170,7 @@ section {
   .type-cursor,
   .tuning-label,
   .anniversary-seal,
-  .decor-star,
+  .decor-sparkle,
   .decor-ring,
   .decor-note,
   .play-btn.is-playing {
