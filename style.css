@@ -499,54 +499,9 @@ section {
   align-items: center;
 }
 
-/* fone de ouvido apoiado em cima do aparelho, decorativo */
-.wm-headphones {
-  position: relative;
-  width: 40%;
-  height: 44px;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.wm-headband {
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 40px;
-  border: 6px solid var(--flat-outline);
-  border-bottom: none;
-  border-radius: 130px 130px 0 0;
-  background: var(--flat-panel);
-}
-
-.wm-earcup {
-  position: absolute;
-  bottom: 2px;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: var(--flat-panel);
-  border: 4px solid var(--flat-outline);
-}
-
-.wm-earcup-l { left: -2px; }
-.wm-earcup-r { right: -2px; }
-
-.wm-cord {
-  position: absolute;
-  top: 26px;
-  right: 4px;
-  width: 3px;
-  height: 22px;
-  background: var(--flat-outline);
-  transform: rotate(18deg);
-  transform-origin: top;
-  border-radius: 2px;
-}
-
 /* corpo principal — flat, contorno grosso, sombra "dura" sem blur */
 .wm-chassis {
   width: 100%;
-  margin-top: -8px;
   z-index: 1;
   display: flex;
   flex-direction: column;
@@ -869,16 +824,20 @@ section {
 
 /* rodinha de volume, flat, encaixada na lateral */
 .wm-volume-wheel {
-  position: absolute;
-  bottom: 14px;
-  right: -16px;
-  width: 34px;
-  height: 34px;
+  position: relative;
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   background: var(--flat-panel);
-  border: 3px solid var(--flat-outline);
+  border: 2.5px solid var(--flat-outline);
   box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.4);
   touch-action: none;
+  cursor: url('assets/cursor-tape.svg') 16 16, grab;
+}
+
+.wm-volume-wheel:active {
+  cursor: url('assets/cursor-tape.svg') 16 16, grabbing;
 }
 
 .knob-face {
@@ -890,11 +849,11 @@ section {
 
 .knob-indicator {
   position: absolute;
-  top: 3px;
+  top: 5px;
   left: 50%;
-  width: 3px;
-  height: 10px;
-  background: var(--flat-outline);
+  width: 4px;
+  height: 15px;
+  background: var(--pink-neon);
   border-radius: 1px;
   transform: translateX(-50%);
 }
@@ -1128,8 +1087,8 @@ section {
   .wm-speaker-grille { grid-template-columns: repeat(3, 1fr); }
   .wm-speaker-grille span { width: 6px; height: 6px; }
 
-  .wm-volume-wheel { width: 28px; height: 28px; right: -12px; }
-  .wm-earcup { width: 22px; height: 22px; }
+  .wm-volume-wheel { width: 40px; height: 40px; }
+  .wm-transport { gap: 0.4rem; }
 
   .boombox { flex-wrap: wrap; justify-content: center; }
   .boombox-speaker { display: none; }

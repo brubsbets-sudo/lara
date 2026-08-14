@@ -141,7 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnForward = document.getElementById('btn-forward');
   const reelLeft = document.getElementById('reel-left');
   const reelRight = document.getElementById('reel-right');
-  const tapeCounter = document.getElementById('tape-counter');
   const seekBar = document.getElementById('seek-bar');
   const timeCurrent = document.getElementById('time-current');
   const timeDuration = document.getElementById('time-duration');
@@ -203,10 +202,6 @@ document.addEventListener('DOMContentLoaded', () => {
   audio.addEventListener('timeupdate', () => {
     seekBar.value = audio.currentTime;
     timeCurrent.textContent = formatTime(audio.currentTime);
-
-    // contador de fita tipo odômetro, sobe conforme o áudio avança
-    const counterValue = Math.floor(audio.currentTime * 10) % 10000;
-    tapeCounter.textContent = counterValue.toString().padStart(4, '0');
 
     // se o áudio estiver pausado (ex: acabou de dar seek), garante que a
     // posição das bobinas reflita o novo currentTime mesmo sem o loop rodando
