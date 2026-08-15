@@ -394,6 +394,27 @@ section {
   align-items: center;
 }
 
+.download-link {
+  margin-top: 1.3rem;
+  display: inline-block;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: var(--font-pixel);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  padding: 0.5rem 1.1rem;
+  border-radius: 3px;
+  transition: background 0.2s var(--ease), color 0.2s var(--ease);
+}
+
+.download-link:hover,
+.download-link:focus-visible {
+  background: var(--gold);
+  color: var(--ink);
+}
+
 .walkman {
   position: relative;
   width: 100%;
