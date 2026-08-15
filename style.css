@@ -395,32 +395,20 @@ section {
 }
 
 .download-link {
-  margin-top: 1.3rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  background: transparent;
-  border: 1px solid var(--gold);
+  margin-top: 1rem;
   color: var(--gold);
   font-family: var(--font-pixel);
   font-size: 0.75rem;
   letter-spacing: 0.1em;
-  text-decoration: none;
-  padding: 0.3rem 0.65rem;
-  border-radius: 3px;
-  transition: background 0.2s var(--ease), color 0.2s var(--ease);
-}
-
-.download-link svg {
-  width: 13px;
-  height: 13px;
-  flex-shrink: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  opacity: 0.8;
+  transition: opacity 0.2s var(--ease);
 }
 
 .download-link:hover,
 .download-link:focus-visible {
-  background: var(--gold);
-  color: var(--ink);
+  opacity: 1;
 }
 
 .walkman {
